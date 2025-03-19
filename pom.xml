@@ -1,0 +1,368 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ECOMMERS</groupId>
+  <artifactId>ebay</artifactId>
+  <packaging>war</packaging>
+ <version>1.0.0.${BUILD_NUMBER}</version>
+  
+<!-- <version>1.0-SNAPSHOT  change by uday</version>  -->
+
+  <name>ebay Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  
+  <dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>				
+            <groupId>org.seleniumhq.selenium</groupId>								
+            <artifactId>selenium-java</artifactId>								
+            <version>2.45.0</version>								
+		</dependency>
+		
+		
+		
+		<dependency>				
+            <groupId>org.testng</groupId>								
+            <artifactId>testng</artifactId>								
+            <version>6.8</version>								
+            <scope>test</scope>							  			
+       </dependency>		
+		
+  </dependencies>
+  
+<!-- ||BUILD__PROFILES||-->
+  
+<profiles>
+	<profile>
+		<id>test</id>
+			<build>
+				<plugins> 
+					<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-antrun-plugin</artifactId>        															<!-- ||BUILD_PROFILES-->
+							<version>1.1</version>																							<!-- ||BUILD_PROFILES-->
+								<executions>																								<!-- ||BUILD_PROFILES-->	
+									<execution>																								<!-- ||BUILD_PROFILES-->
+											<phase>test</phase>																				<!-- ||BUILD_PROFILES-->			
+												<goals>																						<!-- ||BUILD_PROFILES-->
+													<goal>run</goal>
+												</goals>
+											<configuration>
+												<tasks>
+													<echo>Using env.test.properties</echo>
+													<copy file="src/main/resources/env-test.properties"
+													tofile="${project.build.outputDirectory}/env.properties" overwrite="true"/>
+													<delete file="${project.build.outputDirectory}/env-test.properties"/>
+													<delete file="${project.build.outputDirectory}/env-int.properties"/>
+													<delete file="${project.build.outputDirectory}/env-prod.properties"/>
+												</tasks>
+											</configuration>
+									</execution>
+								</executions>
+					</plugin>
+				</plugins> 
+			</build>
+	</profile>
+</profiles>
+
+
+<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<===============>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<===============>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   
+														BUILD_PROFILES
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<===============>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<===============>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+
+
+
+
+
+<!--Tipical Build Confuguration
+ =========================- -->
+
+
+  <build>
+    <finalName>ebay</finalName>
+	
+	    
+		
+	<plugins> 
+		
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-antrun-plugin</artifactId>
+			<version>1.1</version>
+		
+		        <executions>
+					<execution>
+							<phase>validate</phase>
+							<id>validate</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+									<configuration>
+											<tasks>
+												 <echo> ===========================>>>>>>>>>>>>>>>>validate phase</echo>
+											</tasks>
+									</configuration>
+					</execution>
+					
+					
+					
+					<execution>
+							<phase>compile</phase>
+							<id>compile</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+									<configuration>
+											<tasks>
+												<echo>=============>>>>>>>>>>>>> Compilation____ phase </echo>
+												<echo>                           ================= </echo>
+											</tasks>
+									</configuration>
+					</execution>
+					
+					
+					<execution>
+							<phase>test</phase>
+							<id>test</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+									<configuration>
+											<tasks>
+												<echo>=============>>>>>>>>>>>>> Unit_TEst phase </echo>
+												<echo>                          =================</echo>
+											</tasks>
+									</configuration>
+					</execution>
+					
+					
+					<execution>
+							<phase>package</phase>
+							<id>package</id>
+									<goals>
+										<goal>run</goal>
+									</goals>
+											<configuration>
+													<tasks>
+														<echo>=============>>>>>>>>>>>> Package phase </echo>
+
+														<echo>===========_============ </echo>
+
+														<echo>===================================== </echo>
+
+													</tasks>
+											</configuration>
+					</execution>
+					
+					
+										<execution>
+							<phase>install</phase>
+							<id>install</id>
+									<goals>
+										<goal>run</goal>
+									</goals>
+											<configuration>
+													<tasks>
+														<echo>=============>>>>>>>>>>>>> Install Phase </echo>
+
+														<echo>===========_============ </echo>
+
+														<echo>===================================== </echo>
+
+													</tasks>
+											</configuration>
+					</execution>
+					
+					
+					
+					
+					
+					<execution>
+							<phase>deploy</phase>
+							<id>deploy</id>
+									<goals>
+										<goal>run</goal>
+									</goals>
+										<configuration>
+												<tasks>
+													<echo>=============>>>>>>>>>> Deploy in to NexusRepo </echo>
+													<echo>==========================Deploy==phase ========== </echo>
+												</tasks>
+										</configuration>
+					</execution>
+					
+					
+				</executions>
+		 </plugin>
+		 
+		
+<!-- 	<plugin>        
+				<groupId>org.apache.tomcat.maven</groupId>        
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>        
+					<configuration>  
+		
+						<url>http://localhost:8083/manager/text</url>
+						<server>tomcatserver</server>
+						<update>true</update>
+						<path>/ebay</path>
+		  
+					</configuration>
+		</plugin>
+      -->
+		  
+		  
+		  
+		  <!--  
+          <plugin> 
+             <groupId>org.jacoco</groupId>
+             <artifactId>jacoco-maven-plugin</artifactId>
+             <version>0.7.5.201505241946</version> 
+        
+                <configuration>
+					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+					<dataFile>${basedir}/target/coverage-reports/jacoco-unit</dataFile>
+                </configuration>
+				<executions> 
+					<execution> 
+						<id>jacoco.initialize</id> 
+                        <goals> 
+							<goal>prepare-agent</goal>
+						</goals> 
+					</execution> 
+					<execution>
+						<id>jacoco-site</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			
+		-->	
+			
+		<!-- 	
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+				<executable>git</executable>     
+				 <arguments>
+					<argument>version</argument>
+				 </arguments>
+				</configuration>
+			</plugin>
+		-->
+	
+		<plugin> 
+					<groupId>ord.codehaus.mojo</groupId>
+					<artifactId>sonar-maven-plugin</artifactId> 
+					<version>2.2</version>
+					<configuration>          
+						<url>http://18.224.2.180:9000/</url>          
+						<server>SonarQube</server>          
+					</configuration>
+		</plugin>
+		
+
+		
+		<!--  
+			<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.7</version>
+						<configuration>
+							<	formats>
+									<format>xml</format>
+								</formats>
+							<aggregate>true</aggregate>
+						</configuration>
+			</plugin>
+		-->
+		<!--tomcat======-->	
+			
+		<!--  
+			<plugin>        
+				<groupId>org.apache.tomcat.maven</groupId>        
+				<artifactId>tomcat7-maven-plugin</artifactId>        
+				<version>2.2</version>        
+					<configuration>          
+						<url>http://localhost:8083/manager/text</url>          
+						<server>tomcatServer</server>          
+						<path>/ebay</path>
+					</configuration>
+			</plugin>
+			
+		-->
+		</plugins> 
+	
+	
+  </build>
+
+<!--    For_NexusRepo
+ <distributionManagement>
+    <repository>
+        <uniqueVersion>false</uniqueVersion>
+        <id>NexusRepo</id>
+        <name>Internal Releasesl</name>
+        <url>http://18.223.72.42:8082/nexus/content/repositories/releases/</url>
+        <layout>default</layout>
+    </repository>
+	
+    <snapshotRepository>
+        <uniqueVersion>true</uniqueVersion>
+        <id>NexusRepo</id>
+        <name>Propellors Snapshots</name>
+        <url>http://18.223.72.42:8082/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement> -->
+  
+   <distributionManagement>
+   
+   <repository>
+        <uniqueVersion>false</uniqueVersion>
+        <id>Jfrog</id>
+        <name>Internal Releasesl</name>
+        <url>http://192.168.0.19:8081/artifactory/libs-release/</url>
+        <layout>default</layout>
+    </repository>
+	
+    <snapshotRepository>
+        <uniqueVersion>true</uniqueVersion>
+        <id>Jfrog</id>
+        <name>Propellors Snapshots</name>
+        <url>http://192.168.0.21:8081/artifactory/libs-snapshot/</url>
+    </snapshotRepository>
+  </distributionManagement> 
+  
+    <!--  <reporting>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.0.0</version>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>checkstyle</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+        </plugin>
+      </plugins>
+    </reporting>
+   -->
+</project>

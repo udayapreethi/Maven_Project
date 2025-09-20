@@ -3,7 +3,7 @@ export MAVEN_HOME=/opt/apache-maven-3.9.6
 export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin
 
 
-
+Configured poll scm
 
 
 export PATH=$PATH:

@@ -1,4 +1,4 @@
 FROM bitnami/tomcat
-COPY myapp.war /usr/local/tomcat/webapps/ROOT.war
+COPY 'C:\Users\NA\.jenkins\workspace\Maven_Project\target\*.war' /bitnami/tomcat/webapps/ebay.war
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
